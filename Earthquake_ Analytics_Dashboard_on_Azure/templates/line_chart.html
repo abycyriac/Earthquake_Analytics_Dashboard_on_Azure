@@ -1,0 +1,33 @@
+<html>
+<head>
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<script type="text/javascript">
+		google.charts.load('current', {'packages':['corechart']});
+		google.charts.setOnLoadCallback(drawChart);
+		function drawChart() {
+			var data = google.visualization.arrayToDataTable([
+				['Magnitude', 'Occurrences'],
+				{% for entry in result %}
+				[ '{{ entry[0] }}' , {{ entry[1] }} ],
+				{% endfor %}
+				]);
+			var options = {
+				title: 'Earthquakes VS Magnitude',
+				vAxis: {title: 'Occurrence'},
+				hAxis: {title: 'Magnitude'},
+				width: 1200,
+				legend: { position: 'side' }
+			};
+			var chart = new google.visualization.LineChart(document.getElementById('line_chart'));
+			chart.draw(data, options);
+		}
+	</script>
+</head>
+<body>
+	<h1>ABY CYRIAC, 1001726541</h1>
+	<h1>Line chart</h1>
+
+	<div id="line_chart" style="width: 50%; height: 500px"></div>
+	
+</body>
+</html>
